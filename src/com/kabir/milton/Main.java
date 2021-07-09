@@ -12,13 +12,30 @@ public class Main {
                     "2. Multiply matrix by a constant\n" +
                     "3. Multiply matrices\n" +
                     "4. Transpose matrix\n" +
+                    "5. Calculate a determinant\n" +
                     "0. Exit");
             System.out.println("Your choice:");
             int ck=sc.nextInt();
             if(ck==0){
                 break;
             }
-            if(ck==4){
+            if(ck==5){
+                int m1,m2,n2,n1;
+                System.out.println("Enter size of matrix:");
+                m1=sc.nextInt();
+                n1= sc.nextInt();
+                System.out.println("Enter matrix:");
+                double [][] ar=new double [m1][n1];
+                for(int i=0;i<m1;i++){
+                    for(int j=0;j<n1;j++){
+                        ar[i][j]=sc.nextDouble();
+                    }
+                }
+                System.out.println("The result is:");
+                System.out.println(matrixDeterminant(ar));
+
+            }
+            else if(ck==4){
                 System.out.println("1. Main diagonal\n" +
                         "2. Side diagonal\n" +
                         "3. Vertical line\n" +
@@ -207,5 +224,36 @@ public class Main {
 
             }
         }
+    }
+    public static double matrixDeterminant (double[][] matrix) {
+        double temporary[][];
+        double result = 0;
+
+        if (matrix.length == 1) {
+            result = matrix[0][0];
+            return (result);
+        }
+
+        if (matrix.length == 2) {
+            result = ((matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]));
+            return (result);
+        }
+
+        for (int i = 0; i < matrix[0].length; i++) {
+            temporary = new double[matrix.length - 1][matrix[0].length - 1];
+
+            for (int j = 1; j < matrix.length; j++) {
+                for (int k = 0; k < matrix[0].length; k++) {
+                    if (k < i) {
+                        temporary[j - 1][k] = matrix[j][k];
+                    } else if (k > i) {
+                        temporary[j - 1][k - 1] = matrix[j][k];
+                    }
+                }
+            }
+
+            result += matrix[0][i] * Math.pow(-1, (double) i) * matrixDeterminant(temporary);
+        }
+        return (result);
     }
 }
