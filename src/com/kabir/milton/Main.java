@@ -16,22 +16,10 @@ public class Main {
                 ar[i][j]=sc.nextInt();
             }
         }
-        m2=sc.nextInt();
-        n2= sc.nextInt();
-        int[][] br=new int [m2][n2];
-        for(int i=0;i<m2;i++){
-            for(int j=0;j<n2;j++){
-                br[i][j]=sc.nextInt();
-            }
-        }
-
-        if(m1!=m2||n1!=n2){
-            System.out.println("ERROR");
-            return;
-        }
+        int x=sc.nextInt();
         for(int i=0;i<m1;i++){
             for(int j=0;j<n1;j++){
-                ar[i][j]+=br[i][j];
+                ar[i][j]*=x;
                 System.out.print(ar[i][j]+" ");
             }
             System.out.println();
